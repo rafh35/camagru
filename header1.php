@@ -7,7 +7,7 @@
         </script>
         <h1>Camagram</h1>
         <div id="header">
-            <a href="index.php?"><img src="camagram.png" id="logo"></a>
+            <a href="index.php"><img src="camagram.png" id="logo"></a>
             <form action="inscription.php" method="get">
                 <button type="submit" name="submit" value="OK" class="button">Inscription</button>
             </form>

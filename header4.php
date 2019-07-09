@@ -10,12 +10,11 @@
                 <button type="submit" name="submit" value="OK" class="button">Inscription</button>
             </form>
             <form action="connection.php" method="get">
-                <button type="submit" name="submit" value="OK" class="button" style="top: 105px;">Connection</button>
+                <button type="submit" name="submit" value="OK" class="button" style="top: 105px;">Se connecter</button>
             </form>
         </div>
     </head>
     <body>
-        <p class="degrade" style="font-size: 300px; font-family: Billabong; text-align: center">Welcome</p>
     </body>
     <footer>
         <p>maberkan 2019</p>
