@@ -1,18 +1,19 @@
 <?php
-  if(!isset($_SESSION))
+    if(!isset($_SESSION))
       session_start();
-  if (empty($_SESSION['login'])){
+    if (empty($_SESSION['login']))
+    {
     header("Location: connection.php");
     exit();
-  }
-  include_once "header.php";
-  if (isset($_GET['err']))
+    }
+    include_once "header4.php";
+    if (isset($_GET['err']))
     echo "<p id=err>$_GET[err]</p>";
-  $mysqli = mysqli_connect('172.18.0.2', 'root', 'rootpass', 'camagram');
+    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
 ?>
 <html>
     <body>
-      <div class="box" style="width: 350px; top:40;">
+      <div class="box" style="width: 350px; top:200px; left:50px;">
         <p id="mdp">Modifier son mot de passe</p><br/>
         <form action="compte2.php" method="post">
           <center>Identifiant: </span><input type="text" name="login" value="" autofocus="autofocus" tabindex="1"/></center>
