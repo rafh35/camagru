@@ -1,12 +1,10 @@
 <?php
     if(!isset($_SESSION))
         session_start();
-    define( 'DB_NAME', 'camagram' );
-    define( 'DB_USER', 'root' );
-    define( 'DB_PASSWORD', 'rootpass' );
-    define( 'DB_HOST', '172.18.0.2' );
-    define( 'DB_TABLE', 'users' );
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
+    include "./config/database.php";
+
+    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
     if(isset($_GET['login'], $_GET['key']) AND !empty($_GET['login']) AND !empty($_GET['key']))
     {
         $login = htmlspecialchars(urldecode($_GET['login']));

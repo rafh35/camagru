@@ -25,24 +25,24 @@ footer {
     -webkit-text-fill-color: transparent;
 }
 .conteneur{
-    margin: 5% auto;
-    width: 662px;
-    height: 300px;
+    margin: 5% 5% auto;
+    width: 1300px;
+    height: 520px;
     display: flex;
     border: 2px black solid;
 }
 #video {
     position: absolute;
     box-shadow: 2px 2px 3px black;
-    width:320px;
-    height:240px;
+    width:650px;
+    height:480px;
 }
   
 #photo {
     position: absolute;
     box-shadow: 2px 2px 3px black;
-    width:320px;
-    height:240px;
+    width:650px;
+    height:480px;
 }
 
 #canvas {
@@ -50,19 +50,19 @@ footer {
 }
 
 .camera {
-    width: 340px;
+    width: 650px;
     display: inline-block;
 }
   
 .output {
-    width: 320px;
+    width: 650px;
     display:inline-block;
 }
 
 #startbutton {
     position: absolute;
-    margin-top: 260px;
-    margin-left: 285px;
+    margin-top: 490px;
+    margin-left: 605px;
     background-color: green;
     font-size: 14px;
     color: white;
@@ -137,9 +137,8 @@ h3 {
     background-color:lightgrey;
     border-radius: 7px;
     box-shadow: 5px 5px 5px grey;
-    float: left;
-    margin-top: auto;
-    margin: 5;
+    float: none;
+    margin-top: 50px;
 }
 .centerbox{
     position: relative;

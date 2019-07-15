@@ -19,19 +19,6 @@
     </div>
 </head>
 <body>
-    <div class="conteneur">
-        <div class="camera">
-            <video id="video">Video stream not available.</video>
-        </div>
-        <canvas id="canvas"></canvas>
-        <div class="output">
-            <img id="photo" alt="The screen capture will appear in this box.">
-        </div>
-        <button id="startbutton">Take photo</button>
-    </div>
-    <div class="galerie" style="border: 2px solid black; box-shadow: 2px 2px 3px black; width: 650px; height: auto; margin: -20.6% 70% auto;">
-        <p>Galerie</p>
-    </div>
 </body>
 <footer>
     <p>maberkan 2019</p>

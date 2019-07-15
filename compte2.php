@@ -13,7 +13,7 @@
     exit();
   }
   $login = $_POST['login'];
-  $mysqli = mysqli_connect('172.18.0.2', 'root', 'rootpass', 'camagram');
+  $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
   $result = mysqli_query($mysqli, "SELECT * FROM users WHERE login = '$login'");
   if (!$result->num_rows)
   {

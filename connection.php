@@ -2,15 +2,12 @@
     if(!isset($_SESSION))
         session_start();
     include_once "header4.php";
+    include "./config/database.php";
+
     if (isset($_GET['err']))
         echo "<p id=err>$_GET[err]</p>";
-   // header("Location: index.php");
-    define( 'DB_NAME', 'camagram' );
-    define( 'DB_USER', 'root' );
-    define( 'DB_PASSWORD', 'rootpass' );
-    define( 'DB_HOST', '172.18.0.2' );
-    define( 'DB_TABLE', 'users' );
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
+
+    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     if(isset($_POST['submit']))
     {
         if (!empty($_POST['login']) || !empty($_POST['password']))
@@ -44,7 +41,7 @@
     ?>
     <html>
         <body>
-            <div class="box centerbox">
+            <div class="box centerbox" style="height: 160px;">
                 <br/>
                 <form action="connection.php" method="POST">
                     <center>Identifiant: </span><input type="text" name="login" value="" autofocus="autofocus" tabindex="1"/></center>
@@ -52,6 +49,9 @@
                     <center>Mot de passe: <input type="password" name="password" value="" tabindex="2"/></center>
                     <br/>
                     <center><button type="submit" name="submit" value="OK" id="button2" tabindex="3">Connection</button></center>
+                </form>
+                <form action="resetpassword.php" method="POST">
+                    <center><button type="submit" name="submit_reset" value="OK" id="button2" tabindex="1">Mot de passe oublié</button></center>
                 </form>
             </div>
         </body>

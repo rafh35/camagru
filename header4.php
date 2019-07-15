@@ -10,7 +10,7 @@
                 <button type="submit" name="submit" value="OK" class="button">Inscription</button>
             </form>
             <form action="connection.php" method="get">
-                <button type="submit" name="submit" value="OK" class="button" style="top: 105px;">Se connecter</button>
+                <button type="submit" name="submit" value="OK" class="button" style="top: 105px;">Connection</button>
             </form>
         </div>
     </head>

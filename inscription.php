@@ -2,12 +2,9 @@
     if(!isset($_SESSION))
         session_start();
     include_once "header4.php";
-    define( 'DB_NAME', 'camagram' );
-    define( 'DB_USER', 'root' );
-    define( 'DB_PASSWORD', 'rootpass' );
-    define( 'DB_HOST', '172.18.0.2' );
-    define( 'DB_TABLE', 'users' );
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
+    include "./config/database.php";
+
+    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     if (isset($_POST['submit']))
     {
@@ -74,7 +71,6 @@
     ?>
     <html>
         <body>
-          <br/>
             <div class="box centerbox"><br/>
                 <form action="inscription.php" method="POST">
                   <center>Identifiant: </span><input type="text" name="login" value="" autofocus="autofocus" tabindex="1"/></center>
