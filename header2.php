@@ -13,7 +13,7 @@
         <form action="deconnection.php" method="get">
             <button type="submit" name="submit" value="OK" class="button" style="top: 105px;">Déconnection</button>
         </form>
-        <form action="desinscrire.php" method="get">
+        <form action="desinscription.php" method="get">
             <button type="submit" name="submit" value="OK" class="button" style="top: 140px;">Désinscription</button>
         </form>
     </div>

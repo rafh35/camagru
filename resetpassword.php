@@ -26,6 +26,7 @@
     {
         $section = "";
     }
+
     if (isset($_POST['submit'], $_POST['email']))
     {
         if(!empty($_POST['email']))
@@ -81,6 +82,62 @@
         else
         {
             echo "<p id=err>Veuillez entrer votre adresse mail</p>";
+        }
+    }
+
+    elseif(isset($_POST['submit'], $_POST['recupCode']))
+    {
+        if(!empty($_POST['recupCode']))
+        {
+            $recupCode = htmlspecialchars($_POST['recupCode']);
+            $verif_req = $pdo->prepare("SELECT id FROM recup_password WHERE email = ? AND code = ?");
+            $verif_req->execute(array($_SESSION['email'], $recupCode));
+            $verif_req = $verif_req->rowCount();
+            if($verif_req == 1)
+            {
+                $del_req = $pdo->prepare("DELETE FROM recup_password WHERE email = ?");
+                $del_req->execute(array($_SESSION['email']));
+                header("Location:http://localhost:8100/camagru/resetpassword.php?section=changemdp");
+            }
+            else
+            {
+                echo "<p id=err>code invalide</p>";
+            }
+        }
+        else
+        {
+            echo "<p id=err>Veuillez entrer un code valide</p>";
+        }
+    }
+
+    else if(isset($_POST['submit']))
+    {
+        if(isset($_POST['newpassword'], $_POST['verifpassword']))
+        {
+            $newpassword = htmlspecialchars($_POST['newpassword']);
+            $verifpassword = htmlspecialchars($_POST['verifpassword']);
+            if(!empty($newpassword) AND !empty($verifpassword))
+            {
+                if($newpassword == $verifpassword)
+                {
+                    $newpassword = hash("Whirlpool", $_POST['newpassword']);
+                    $insert_password = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
+                    $insert_password->execute(array($newpassword, $_SESSION['email']));
+                    header("Location:http://localhost:8100/camagru/connection.php");
+                }
+                else
+                {
+                    echo "<p id=err>Vos mots de passes ne correspondent pas</p>";
+                }
+            }
+            else
+            {
+                echo "<p id=err>Veuillez emplir tous les champs</p>";
+            }
+        }
+        else
+        {
+            echo "<p id=err>Veuillez emplir tous les champs</p>";
         }
     }
     require_once ("newpassword.php");
