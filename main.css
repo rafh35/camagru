@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'billabongregular';
-    src: url('billabong.woff') format('woff');
+    src: url('Billabong.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -25,44 +25,27 @@ footer {
     -webkit-text-fill-color: transparent;
 }
 .conteneur{
-    margin: 5% 5% auto;
-    width: 1300px;
-    height: 520px;
+    width: 1000px;
+    height: 640px;
     display: flex;
+    flex-direction: column;
     border: 2px black solid;
 }
 #video {
     position: absolute;
     box-shadow: 2px 2px 3px black;
-    width:650px;
-    height:480px;
-}
-  
-#photo {
-    position: absolute;
-    box-shadow: 2px 2px 3px black;
-    width:650px;
-    height:480px;
+    width:400px;
+    height:300px;
 }
 
 #canvas {
-    display:none;
+    margin-top: 340px;
 }
 
-.camera {
-    width: 650px;
-    display: inline-block;
-}
-  
-.output {
-    width: 650px;
-    display:inline-block;
-}
-
-#startbutton {
+#takebutton {
     position: absolute;
-    margin-top: 490px;
-    margin-left: 605px;
+    margin-top: 310px;
+    margin-left: 10px;
     background-color: green;
     font-size: 14px;
     color: white;
@@ -71,6 +54,19 @@ footer {
     border: 1px solid green;
 }
 
+#upload {
+    width: 86px;
+    height: 22px;
+    position: absolute;
+    margin-top: 294px;
+    margin-left: 110px;
+    background-color: green;
+    font-size: 22px;
+    color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    border-radius: 20px;
+    border: 1px solid green;
+}
 /* 2eme partie */
 
 #header{
@@ -161,34 +157,8 @@ h3 {
 
 ul {
     list-style-type: none;
-    margin: 7;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    border-radius: 7px;
-    box-shadow: 5px 5px 5px grey;
 }
-li {
-    float: left;
-    font-size: 18;
-}
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-family: Baskerville;
-    font-weight: 600;
-}
-li a:hover {
-    background-color: #111;
-}
-th {
-    border: 1px solid #ddd;
-    width:200;
-    padding: 8px;
-}
+
 .th_button
 {
     width:20;
@@ -227,3 +197,14 @@ center
     margin-right: 50;
     margin-bottom: 10;
 }
+
+input#title{
+    margin-top: 109px;
+    margin-left: 260px;
+}
+
+div.galerie{
+    position: absolute;
+    margin-left: 600px;
+}
+

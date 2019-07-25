@@ -6,18 +6,6 @@
 
     $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-    if($pdo)
-    {
-        // on créer la requête
-        $requete = "CREATE TABLE IF NOT EXISTS `".DB_NAME."`.`recup_password` (
-                    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-                    `email` VARCHAR( 255 ) NOT NULL ,
-                    `code` INT NOT NULL
-                    ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
-        // on prépare et on exécute la requête
-        $pdo->prepare($requete)->execute();
-    }
-
     if(isset($_GET['section']))
     {
         $section = htmlspecialchars($_GET['section']);

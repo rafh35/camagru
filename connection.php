@@ -51,7 +51,7 @@
                     <center><button type="submit" name="submit" value="OK" id="button2" tabindex="3">Connection</button></center>
                 </form>
                 <form action="resetpassword.php" method="POST">
-                    <center><button type="submit" name="submit_reset" value="OK" id="button2" tabindex="1">Mot de passe oublié</button></center>
+                    <center><button type="submit" name="submit_reset" value="OK" id="button2" tabindex="4">Mot de passe oublié</button></center>
                 </form>
             </div>
         </body>
