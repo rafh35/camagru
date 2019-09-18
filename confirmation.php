@@ -1,12 +1,15 @@
 <?php
     if(!isset($_SESSION))
         session_start();
-    include "./config/database.php";
 
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    require_once "./config/database.php";
+    require_once "./controlers/utils.php";
+
+    //$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     if(isset($_GET['login'], $_GET['key']) AND !empty($_GET['login']) AND !empty($_GET['key']))
     {
+        $pdo = dbConnect();
         $login = htmlspecialchars(urldecode($_GET['login']));
         $key = htmlspecialchars($_GET['key']);
 

@@ -1,59 +1,10 @@
-<!-- <html>
-<head>
-    <title>Camagram</title>
-    <meta charset='utf-8'>
-    <link rel="stylesheet" href="main.css" type="text/css" media="all">
-    <script src="capture.js"></script>
-    <h1 class="degrade" style="font-size: 60px; font-family: Billabong; text-align: center">Camagram</h1>
-    <div id="header">
-        <a href="index.php"><img src="camagram.png" id="logo"></a>
-        <form action="compte.php" method="get">
-            <button type="submit" name="submit" value="OK" class="button">Profil</button>
-        </form>
-        <form action="deconnection.php" method="get">
-            <button type="submit" name="submit" value="OK" class="button" style="top: 105px;">Déconnection</button>
-        </form>
-        <form action="desinscription.php" method="get">
-            <button type="submit" name="submit" value="OK" class="button" style="top: 140px;">Désinscription</button>
-        </form>
-    </div>
-</head>
-<body>
-    <div class="conteneur" style="margin: auto;">
-        <div class="camera">
-            <video id="video">Video stream not available.</video>
-        </div>
-        <canvas id="canvas"></canvas>
-        <div class="output">
-            <img id="photo"> The screen capture will appear in this box<img/>
-        </div>
-        <input type="file" id="upload" name="upload" accept="image/png">
-        <button id="startbutton">Take photo</button>
-        <div class="filtres">
-            <input type="image" name="f1" id="lunettes" src="filtres/lunettes.png">
-            <input type="image" name="f2" id="mickey" src="filtres/mickey.png">
-            <input type="image" name="f3" id="fresh" src="filtres/fresh.png">
-        </div>
-        <div class="galerie" style="border: 2px solid black; box-shadow: 2px 2px 3px black; width: 400px; height: 20px; position: absolute; margin-left: 600px">
-
-        </div>
-    </div>
-</body>
-<footer>
-    <p>maberkan 2019</p>
-</footer>
-</html> -->
 <?php
     if(!isset($_SESSION))
         session_start();
 
-    require "controlers/utils.php";
-    require_once("plugins/includes.php");
-    require_once("controlers/get_images.php");
-
-    //authVerif(true);
-
-    //$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    require_once "controlers/utils.php";
+    require_once "plugins/includes.php";
+    require_once "controlers/get_images.php";
 
 
     if (isset($_POST['title']) AND (isset($_POST['photo'])))
@@ -80,10 +31,8 @@
             setMessageForm("Impossible d'enregistrer l'image.", 'error');
         }
     }
-
     $images = getImagesByAuth($_SESSION['id']);
     $title = "Nouvelle image";
-    ob_start();
     ?>
     <head>
         <title>Camagram</title>
@@ -92,15 +41,12 @@
         <h1 class="degrade" style="font-size: 60px; font-family: Billabong; text-align: center">Camagram</h1>
         <div id="header">
             <a href="header2.php"><img src="camagram.png" id="logo"></a>
-            <form action="compte.php" method="get">
-                <button type="submit" name="submit" value="OK" class="button">Profil</button>
-            </form>
-            <form action="deconnection.php" method="get">
-                <button type="submit" name="submit" value="OK" class="button" style="top: 105px;">Déconnection</button>
-            </form>
-            <form action="desinscription.php" method="get">
-                <button type="submit" name="submit" value="OK" class="button" style="top: 140px;">Désinscription</button>
-            </form>
+            <div style="margin-top: -20px; margin">
+                <a class="linkHeader" href="compte.php">Profil</a>
+                <a class="linkHeader" href="galerie.php">Galerie</a>
+                <a class="linkHeader" href="deconnection.php">Déconnexion</a>
+                <a class="linkHeader" href="desinscription.php">Désinscription</a>
+            </div>
         </div>
     </head>
     <body>
@@ -117,13 +63,13 @@
                         <a href=<?= "image.php?img=" . $img['id'] ?>>
                             <img src=<?= "photos/" . $img['name'] ?>>
                         </a>
-                    </div><br />
+                    </div>
                 <?php }} ?>
             </div>
             <div>
                 <form action="header2.php" method="POST" enctype="multipart/form-data" id="postform">
                     <input type="file" id="upload" name="upload" accept="image/png"/>
-                    <ul style="width: 70px; height: 170px; margin-left: 420px;"><br />
+                    <ul style="width: 70px; height: 170px; margin-left: 450px;"><br />
                         <li><label><input type="radio" name="alpha" class="alpha" value="alpha1" checked="checked" style="margin-bottom: 15px"><img style="width: 45px;" src=<?= "./filtres/f1.png" ?>></label></li><br /><br />
                         <li><label><input type="radio" name="alpha" class="alpha" value="alpha2" style="margin-bottom: 15px"><img style="width: 45px" src=<?= "./filtres/f2.png" ?>></label></li><br /><br />
                         <li><label><input type="radio" name="alpha" class="alpha" value="alpha3"><img style="width: 45px" src=<?= "./filtres/f3.png" ?>></label></li><br /><br />
@@ -134,5 +80,5 @@
                 </form>
             </div>
         </div>
-        <script src="./capture.js" type="text/javascript"></script>
+        <script src="capture.js" type="text/javascript"></script>
     </body>

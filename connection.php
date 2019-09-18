@@ -1,15 +1,17 @@
 <?php
     if(!isset($_SESSION))
         session_start();
-    include_once "header4.php";
-    include "./config/database.php";
+
+    require_once "header4.php";
+    require_once "./config/database.php";
+    require_once "./controlers/utils.php";
 
     if (isset($_GET['err']))
         echo "<p id=err>$_GET[err]</p>";
 
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     if(isset($_POST['submit']))
     {
+        $pdo = dbConnect();
         if (!empty($_POST['login']) || !empty($_POST['password']))
         {
             $login = htmlspecialchars($_POST['login']);
@@ -21,16 +23,23 @@
 
             if($loginExist == 1)
             {
-                $loginInfo = $reqLogin->fetch();
-                $_SESSION['id'] = $loginInfo['id'];
-                $_SESSION['login'] = $loginInfo['login'];
-                $_SESSION['password'] = $loginInfo['password'];
-                header("Location: header2.php");
+                $user = $reqLogin->fetch();
+                if($user['confirme'] == 1)
+                {
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['login'] = $user['login'];
+                    $_SESSION['password'] = $user['password'];
+                    header("Location: header2.php");
+                }
+                else
+                {
+                    header("Location: connection.php?err=Merci de confirmer votre compte");
+                    exit();
+                }
             }
             else
             {
-                header("Location: connection.php?err=Login ou mot de passe erroné !\n");
-                exit();
+                echo "<p id=err>Identifiant ou mot de passe incorrect</p>";
             }
         }
         else
@@ -48,10 +57,10 @@
                     <br/>
                     <center>Mot de passe: <input type="password" name="password" value="" tabindex="2"/></center>
                     <br/>
-                    <center><button type="submit" name="submit" value="OK" id="button2" tabindex="3">Connection</button></center>
+                    <center><button type="submit" name="submit" value="OK" tabindex="3">Connection</button></center>
                 </form>
                 <form action="resetpassword.php" method="POST">
-                    <center><button type="submit" name="submit_reset" value="OK" id="button2" tabindex="4">Mot de passe oublié</button></center>
+                    <center><button type="submit" name="submit_reset" value="OK" tabindex="4">Mot de passe oublié</button></center>
                 </form>
             </div>
         </body>

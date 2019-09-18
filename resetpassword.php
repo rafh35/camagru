@@ -1,10 +1,11 @@
 <?php
     if(!isset($_SESSION))
         session_start();
-    include_once "header4.php";
-    include "./config/database.php";
 
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    require_once "header4.php";
+    require_once "./config/database.php";
+    require_once "./controlers/utils.php";
+
 
     if(isset($_GET['section']))
     {
@@ -14,6 +15,8 @@
     {
         $section = "";
     }
+
+    $pdo = dbConnect();
 
     if (isset($_POST['submit'], $_POST['email']))
     {
@@ -52,7 +55,13 @@
                     {
                         $recup_insert = $pdo->prepare("INSERT INTO recup_password(email, code) VALUES (?, ?)");
                         $recup_insert->execute(array($email, $recupCode));
-                        mail("<".$email.">", "Récupération de mot de passe - Camagram", "Bonjour ".$login.", \n\nVoici votre code de récupération:\n $recupCode");
+
+                        $header = "MIME-Version: 1.0\r\n";
+                        $header .= 'From:"camagram"<maberkan@student.le-101.fr>' . "\n";
+                        $header .= 'Content-Type:text/html; charset="uft-8"' . "\n";
+                        $header .= 'Content-Transfer-Encoding: 8bit';
+
+                        mail("<".$email.">", "Récupération de mot de passe - Camagram", "Bonjour ".$login.", \n\nVoici votre code de récupération:\n $recupCode", $header);
                         header("Location:http://localhost:8100/camagru/resetpassword.php?section=code");
 
                     }

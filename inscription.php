@@ -1,15 +1,18 @@
 <?php
     if(!isset($_SESSION))
         session_start();
-    include_once "header4.php";
-    include "./config/database.php";
 
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    require_once "controlers/utils.php";
+    require_once "header4.php";
+    require_once "./config/database.php";
+
+    //$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     if (isset($_POST['submit']))
     {
         if (!empty($_POST['login']) AND !empty($_POST['password']) AND !empty($_POST['email']))
         {
+            $pdo = dbConnect();
             $login = htmlspecialchars($_POST['login']);
             $password = hash("Whirlpool", $_POST['password']);
             $email = htmlspecialchars($_POST['email']);
@@ -47,7 +50,13 @@
                         }
                         $insertUser = $pdo->prepare("INSERT INTO users(login, password, email, confirmekey) VALUES (?, ?, ?, ?)");
                         $insertUser->execute(array($login, $password, $email, $key));
-                        mail("<".$email.">", "Confirmation compte", "Bonjour ".$login.", vous avez creez un compte Camagram !\n\nMerci de cliquer sur ce lien pour confirmer : http://localhost:8100/camagru/confirmation.php?login=".urlencode($login)."&key=".$key."");
+
+                        $header = "MIME-Version: 1.0\r\n";
+                        $header .= 'From:"camagram"<maberkan@student.le-101.fr>' . "\n";
+                        $header .= 'Content-Type:text/html; charset="uft-8"' . "\n";
+                        $header .= 'Content-Transfer-Encoding: 8bit';
+
+                        mail("<".$email.">", "Confirmation compte", "Bonjour ".$login.", vous avez creez un compte Camagram !\n\nMerci de cliquer sur ce lien pour confirmer : http://localhost:8100/camagru/confirmation.php?login=".urlencode($login)."&key=".$key."", $header);
                         header("Location: connection.php?err=Vérifiez votre mail de confirmation !");
                     }
                 }

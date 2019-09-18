@@ -1,5 +1,5 @@
 <?php
-    include_once "utils.php";
+    require_once "utils.php";
 
     function getAllImages() {
         $pdo = dbConnect();
@@ -9,7 +9,7 @@
 
     function getImagesByAuth($id) {
       $pdo = dbConnect();
-      $req = $pdo->prepare("SELECT * FROM images WHERE author_id = ? ORDER BY date DESC LIMIT 0,4");
+      $req = $pdo->prepare("SELECT * FROM images WHERE author_id = ? ORDER BY date DESC");
       $req->execute(array($id));
       return $req;
     }

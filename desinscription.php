@@ -2,16 +2,18 @@
     if(!isset($_SESSION))
         session_start();
 
-    include_once "header5.php";
-    include "./config/database.php";
+    require_once "header5.php";
+    require_once "./config/database.php";
+    require_once "./controlers/utils.php";
 
-    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    //$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     if (isset($_GET['err']))
         echo "<p id=err>$_GET[err]</p>";
 
     if(isset($_POST['submit']))
     {
+        $pdo = dbConnect();
         if (!empty($_POST['login']) || !empty($_POST['password']))
         {
             $login = htmlspecialchars($_POST['login']);

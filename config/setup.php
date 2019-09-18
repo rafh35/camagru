@@ -1,7 +1,8 @@
 <?php
     if(!isset($_SESSION))
         session_start();
-    require "./config/database.php";
+
+    require_once "./config/database.php";
     function install()
     {
         // connexion à Mysql sans base de données
@@ -27,7 +28,7 @@
 				`email` VARCHAR( 255 ) NOT NULL ,
 				`confirmeKey` VARCHAR( 255 ) NOT NULL ,
 				`confirme` INT( 1 ) NOT NULL ,
-				`mail_comment` INT NOT NULL
+				`mail_comment` INT DEFAULT 1
 				);
 				
 				CREATE TABLE IF NOT EXISTS `".DB_NAME."`.`images` (
@@ -58,4 +59,5 @@
             $connexion->prepare($requete)->execute();
         }
     }
+    install();
 ?>
